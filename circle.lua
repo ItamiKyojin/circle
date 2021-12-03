@@ -40,14 +40,7 @@ function PointOnCircle(centerX, centerZ, radius, angle)
     return x, z
 end
 
-function SinHeight(radius, num)
-    if num > 360 then
-        num = num - 360
-    end
-    return radius * math.cos(math.rad(num)), num
-end
-
-function Main(height, radius, heightOffset, numPoints, buffer)
+function Main(height, radius, numPoints, buffer)
     -- get list of points on circle
     local centerPoint = {0, 0}
     local points = {}
@@ -68,24 +61,20 @@ function Main(height, radius, heightOffset, numPoints, buffer)
         PlaceAndDestroyList(points, "lapis_block", buffer)
     end]]
 
-    --local heightOffsetNum = 0
-    --local curHeightOffset = 0
     while true do
         for _, point in ipairs(points) do
-            --curHeightOffset = Round(SinHeight(heightOffset, heightOffsetNum))
-            --heightOffsetNum = heightOffsetNum + 12
-            PlaceAndDestroy({point[1], height --[[+ curHeightOffset]], point[2]}, "lapis_block", buffer)
+            PlaceAndDestroy({point[1], height, point[2]}, "lapis_block", buffer)
         end
     end
 end
 
 local _height = arg[1] + 0
 local _radius = arg[2] + 0
-local _heightOffset = arg[3] + 0
-local _numPoints = arg[4] + 0
-local _buffer = arg[5] + 0
-Main(_height, _radius, _heightOffset, _numPoints, _buffer)
+local _numPoints = arg[3] + 0
+local _buffer = arg[4] + 0
+Main(_height, _radius, _numPoints, _buffer)
 
 --[[
+    Nice numbers: radius 5; numPoints 28
     Nice numbers: radius 5; numPoints 32
 ]]
